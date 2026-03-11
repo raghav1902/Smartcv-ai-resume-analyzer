@@ -1,73 +1,160 @@
-# AI Resume Analyzer with ATS Score & Job Matching
+Professional GitHub README (Production Level)
 
-A full-stack web application that allows users to upload their resume (PDF), analyzes the resume using NLP techniques, extracts important skills, calculates an ATS score, compares the resume with a job description, and provides actionable suggestions.
+Use this as your README.md
 
-## Features
-- **Resume Upload & Parsing:** Drag-and-drop PDF extraction.
-- **NLP Skill Extraction:** Identifies technical skills using RegEx and NLP boundaries.
-- **ATS Resume Score:** Calculates a 0-100 score based on skill density and structural completeness.
-- **Job Description Matching:** Uses TF-IDF and Cosine Similarity to compare your resume against a target job description.
-- **Feedback & Analysis:** Provides suggestions on missing skills and missing sections.
-- **Modern Dashboard:** Built with React, featuring glassmorphism elements, clean layout, and real-time feedback.
+# SmartCV – AI Resume Analyzer
 
----
+🚀 AI-powered resume analysis platform that evaluates resumes for ATS compatibility, skill extraction, and job relevance.
 
-## Tech Stack
-- **Backend:** Python, Flask, MongoDB, PyPDF2, spaCy, NLTK, scikit-learn, pandas
-- **Frontend:** React (Create React App), Axios, Lucide React, React Dropzone
+## Live Architecture
+
+User → React Frontend → Flask Backend → MongoDB Atlas
 
 ---
 
-## 🚀 Deployment Instructions (Railway)
+# Features
 
-This project is a monorepo containing both the frontend and backend. You can deploy both as separate services within a single **Railway** project.
-
-### Step 1: Deploy the Backend
-1. In your [Railway](https://railway.app) dashboard, click **New Project** -> **Deploy from GitHub repo** and select your repository.
-2. Once added, go to the Service's **Settings > General** and change the **Root Directory** to `/backend`.
-3. Go to **Variables** and add your MongoDB connection string:
-   ```bash
-   MONGO_URI=mongodb+srv://<username>:<password>@cluster0.../resume_analyzer?...
-   ```
-4. Wait for the build to finish. Railway will use the `/backend/Procfile` to automatically download the required SpaCy NLP model and start the `gunicorn` server securely.
-5. Go to **Settings > Domains** and click **Generate Domain** (e.g., `your-backend.up.railway.app`). Copy this URL.
-
-### Step 2: Deploy the Frontend
-1. In the **same Railway project**, click **New** -> **GitHub Repo** and select the exact same repository again (this creates a second service).
-2. Go to the new frontend Service's **Settings > General** and change the **Root Directory** to `/frontend`.
-3. Go to **Variables** and add the API URL pointing to the backend domain you just generated in Step 1:
-   ```bash
-   REACT_APP_API_URL=https://your-backend.up.railway.app
-   ```
-4. Wait for the build to finish. Railway will detect your React app, build it, and serve it automatically.
-5. Go to **Settings > Domains** and click **Generate Domain**. **This is your live website URL!**
+- 📄 Resume PDF Upload
+- 🤖 AI-powered skill extraction
+- 📊 ATS compatibility scoring
+- 🎯 Job description matching
+- 🧠 Keyword analysis
+- ☁️ Cloud-ready architecture
 
 ---
 
-## 💻 Local Setup (Development)
+# Tech Stack
 
-If you wish to test the application locally:
+## Frontend
+- React.js
+- Axios
+- CSS
 
-### 1. Backend Setup
+## Backend
+- Python
+- Flask
+- REST APIs
+- Resume parsing modules
 
-Start the React development server (runs on port 3000):
-```bash
+## Database
+- MongoDB Atlas
+
+## Deployment
+- Backend: Render
+- Frontend: Vercel
+
+---
+
+# System Architecture
+
+
+User
+↓
+React Frontend
+↓
+Flask API
+↓
+Resume Processing Modules
+↓
+MongoDB Atlas
+
+
+---
+
+# Project Structure
+
+
+AI-Resume-Analyzer
+│
+├ backend
+│ ├ app.py
+│ ├ ats_scoring.py
+│ ├ database.py
+│ ├ job_matcher.py
+│ ├ resume_parser.py
+│ ├ skill_extractor.py
+│ ├ requirements.txt
+│
+├ frontend
+│ ├ src
+│ ├ public
+│ ├ package.json
+│
+├ Procfile
+└ README.md
+
+
+---
+
+# Resume Processing Pipeline
+
+1. User uploads resume PDF
+2. Backend extracts resume text
+3. Skill extraction identifies technical skills
+4. ATS scoring analyzes keyword presence
+5. Job matcher compares resume with job description
+6. Results are returned to the frontend
+7. Analysis stored in MongoDB
+
+---
+
+# AI Components
+
+### Skill Extraction
+Detects technical skills from resume text.
+
+### ATS Scoring
+Analyzes resume keyword optimization for ATS systems.
+
+### Job Matching
+Compares resume content with job descriptions.
+
+---
+
+
+---
+
+# Running Locally
+
+### Backend
+
+
+cd backend
+pip install -r requirements.txt
+python app.py
+
+
+### Frontend
+
+
+cd frontend
+npm install
 npm start
-```
 
-### 3. Usage
-- Once both servers are running, access the application in your browser at `http://localhost:3000`.
-- Drag and drop your `.pdf` resume onto the dropzone.
-- Wait for the NLP analysis to complete.
-- Review your ATS Score and extracted skills.
-- Paste a sample Job Description into the matching form to see your Match Percentage and Missing Skills output.
 
 ---
 
-## Folder Structure Highlights
-- `/backend/app.py`: Main Flask API Router. Features the core `/analyze-resume` endpoint.
-- `/backend/resume_parser.py`: PDF text and named entity extraction.
-- `/backend/ats_scoring.py`: Heuristics logic for generating your overall resume strength score.
-- `/backend/job_matcher.py`: TF-IDF scoring against target job description text.
-- `/frontend/src/App.js`: Core React Dashboard and Upload state machine.
-- `/frontend/src/index.css`: Vanilla CSS Design System with variables and utility classes.
+# Risks and Limitations
+
+- Resume formats vary widely
+- Skill extraction relies on keyword matching
+- ATS scoring uses rule-based evaluation
+
+---
+
+# Future Improvements
+
+- GPT-based resume suggestions
+- semantic job matching
+- recruiter dashboard
+- LinkedIn integration
+- resume improvement recommendations
+
+---
+
+# Author
+
+**Raghav Kakrania**
+
+GitHub:  
+https://github.com/raghav1902
