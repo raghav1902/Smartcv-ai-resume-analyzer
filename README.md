@@ -18,54 +18,37 @@ A full-stack web application that allows users to upload their resume (PDF), ana
 
 ---
 
-## How to Run the Project Locally
+## 🚀 Deployment Instructions (Railway)
+
+This project is a monorepo containing both the frontend and backend. You can deploy both as separate services within a single **Railway** project.
+
+### Step 1: Deploy the Backend
+1. In your [Railway](https://railway.app) dashboard, click **New Project** -> **Deploy from GitHub repo** and select your repository.
+2. Once added, go to the Service's **Settings > General** and change the **Root Directory** to `/backend`.
+3. Go to **Variables** and add your MongoDB connection string:
+   ```bash
+   MONGO_URI=mongodb+srv://<username>:<password>@cluster0.../resume_analyzer?...
+   ```
+4. Wait for the build to finish. Railway will use the `/backend/Procfile` to automatically download the required SpaCy NLP model and start the `gunicorn` server securely.
+5. Go to **Settings > Domains** and click **Generate Domain** (e.g., `your-backend.up.railway.app`). Copy this URL.
+
+### Step 2: Deploy the Frontend
+1. In the **same Railway project**, click **New** -> **GitHub Repo** and select the exact same repository again (this creates a second service).
+2. Go to the new frontend Service's **Settings > General** and change the **Root Directory** to `/frontend`.
+3. Go to **Variables** and add the API URL pointing to the backend domain you just generated in Step 1:
+   ```bash
+   REACT_APP_API_URL=https://your-backend.up.railway.app
+   ```
+4. Wait for the build to finish. Railway will detect your React app, build it, and serve it automatically.
+5. Go to **Settings > Domains** and click **Generate Domain**. **This is your live website URL!**
+
+---
+
+## 💻 Local Setup (Development)
+
+If you wish to test the application locally:
 
 ### 1. Backend Setup
-
-Open a terminal and navigate to the `backend` folder:
-```bash
-cd AI-Resume-Analyzer/backend
-```
-
-Create a virtual environment:
-```bash
-python -m venv venv
-```
-
-Activate the virtual environment:
-- Windows: `.\\venv\\Scripts\\Activate.ps1`
-- Mac/Linux: `source venv/bin/activate`
-
-Install the required Python dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-Download the necessary NLP model for spaCy:
-```bash
-python -m spacy download en_core_web_sm
-```
-
-### Configure MongoDB
-The application uses MongoDB to store user and resume data.
-1. Install MongoDB Locally (or use MongoDB Atlas for a cloud database).
-2. Start the MongoDB service on your local machine if not using Atlas. 
-3. Setup Environment Variables: By default, the application will try to connect to `mongodb://localhost:27017/`. If you are using MongoDB Atlas or a custom port, create a `.env` file in the `backend` folder and add:
-```bash
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/
-```
-
-Start the Flask REST API server (runs on port 5000):
-```bash
-python app.py
-```
-
-### 2. Frontend Setup
-
-Open a **new** terminal and navigate to the `frontend` folder:
-```bash
-cd AI-Resume-Analyzer/frontend
-```
 
 Start the React development server (runs on port 3000):
 ```bash
