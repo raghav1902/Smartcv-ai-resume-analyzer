@@ -13,7 +13,7 @@ A full-stack web application that allows users to upload their resume (PDF), ana
 ---
 
 ## Tech Stack
-- **Backend:** Python, Flask, SQLite3, PyPDF2, spaCy, NLTK, scikit-learn, pandas
+- **Backend:** Python, Flask, MongoDB, PyPDF2, spaCy, NLTK, scikit-learn, pandas
 - **Frontend:** React (Create React App), Axios, Lucide React, React Dropzone
 
 ---
@@ -46,6 +46,15 @@ Download the necessary NLP model for spaCy:
 python -m spacy download en_core_web_sm
 ```
 
+### Configure MongoDB
+The application uses MongoDB to store user and resume data.
+1. Install MongoDB Locally (or use MongoDB Atlas for a cloud database).
+2. Start the MongoDB service on your local machine if not using Atlas. 
+3. Setup Environment Variables: By default, the application will try to connect to `mongodb://localhost:27017/`. If you are using MongoDB Atlas or a custom port, create a `.env` file in the `backend` folder and add:
+```bash
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/
+```
+
 Start the Flask REST API server (runs on port 5000):
 ```bash
 python app.py
@@ -73,7 +82,7 @@ npm start
 ---
 
 ## Folder Structure Highlights
-- `/backend/app.py`: Main Flask API Router.
+- `/backend/app.py`: Main Flask API Router. Features the core `/analyze-resume` endpoint.
 - `/backend/resume_parser.py`: PDF text and named entity extraction.
 - `/backend/ats_scoring.py`: Heuristics logic for generating your overall resume strength score.
 - `/backend/job_matcher.py`: TF-IDF scoring against target job description text.
